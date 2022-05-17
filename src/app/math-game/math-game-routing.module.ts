@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EquationComponent } from './equation/equation.component';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./math-game/math-game.module').then(m => m.MathGameModule)
+    component: EquationComponent
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class MathGameRoutingModule { }
