@@ -1,4 +1,6 @@
 <div class="va">
     {{ equation }} = 
-    <input class="inline" type="number" name="" id="">
+    <input (keyup)="onKeyUp($event)" class="inline" type="number" name="" id="">
 </div>
+
+{{ mathForm.errors | json }}

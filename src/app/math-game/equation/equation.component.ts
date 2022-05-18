@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ExpressionEvaluator } from '../expression-evaluator';
+
 
 @Component({
   selector: 'app-equation',
@@ -18,7 +20,11 @@ export class EquationComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.generateEquation(3)
+    this.generateEquation(5)
+    console.log(this.equation);
+    let infix = ExpressionEvaluator.infixToPostfix(this.equation);
+    console.log(infix);
+    console.log(ExpressionEvaluator.evaluateInfixExpression(infix));
   }
 
   generateEquation(n: number) {
@@ -32,6 +38,21 @@ export class EquationComponent implements OnInit {
         this.equation += ' '
       }
     }
+  }
+
+  onKeyUp(event: any) {
+    let input = event.target.value;
+    input = parseFloat(input);
+
+    let result = ExpressionEvaluator.evaluate(this.equation);
+    
+    if (input !== result) {
+      this.mathForm.setErrors({ invalidInputResult: true })
+    } else {
+      this.mathForm.setErrors(null);
+    }
+
+
   }
 
   generateNumbers(n: number) {
